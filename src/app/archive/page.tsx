@@ -1,59 +1,55 @@
 import { wixClient } from "@/lib/wixClient";
-import ArchiveClient from "@/app/archive/ArchiveClient";
+import ArchiveClient from "./ArchiveClient";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function ArchivePage() {
   try {
-    // 1. Fetch from 'Artworks' collection
-    const response = await wixClient.items.query("Artworks").limit(100).find();
+    // Targeting the confirmed ID: Import1
+    const response = await wixClient.items.query("Import1").limit(100).find();
 
-    // 2. Map Wix's auto-generated field keys to your clean UI
+    if (!response.items || response.items.length === 0) {
+      return (
+        <div className="pt-40 text-center font-mono text-[10px] uppercase text-red-600">
+          Connected to 'Import1' but 0 items returned. <br />
+          Go to Wix CMS &gt; Sync Sandbox to Live.
+        </div>
+      );
+    }
+
     const artworks = response.items
-      .filter((item) => item && item.data)
-      .map((item) => {
+      .filter((item: any) => item && item.data)
+      .map((item: any) => {
         const d = item.data;
-
-        // Wix Image Helper
-        const rawImage = typeof d.image === "string" ? d.image : d.image?.src;
-        const imageUrl = rawImage
-          ? `https://static.wixstatic.com/media/${rawImage.replace("wix:image://v1/", "").split("/")[0]}`
-          : null;
+        const rawImage = d.image;
+        const imageUrl =
+          rawImage &&
+          typeof rawImage === "string" &&
+          rawImage.includes("wix:image")
+            ? `https://static.wixstatic.com/media/${rawImage.replace("wix:image://v1/", "").split("/")[0]}`
+            : null;
 
         return {
           _id: item._id,
           title: d.title || "Untitled",
-          subject: d.subject || d.Subject || "Wildlife Study",
-          collectionId: d.CollectionID || "legacy",
-          // These match the keys (d., F., W) from your CMS screenshot
-          description: d["d."] || d.description || "",
-          fieldNotes: d["F."] || d.fieldNotes || "",
-          witnessBadge: d["W"] || d.witnessBadge || "Original Reference",
-          status: d.status || d.Status || "Available",
+          subject: d.subject || "",
+          collectionId: String(d.collectionId || "avian").toLowerCase(),
+          status: d.status || "Visible",
           image: imageUrl,
         };
       });
 
     return <ArchiveClient initialArtworks={artworks} />;
   } catch (error: any) {
-    console.error("Wix Fetch Error:", error);
-
-    // If it's still a 403, we show a helpful instruction
-    if (
-      error.message?.includes("403") ||
-      error.details?.applicationError?.code === 403
-    ) {
-      return (
-        <div className="pt-40 px-10 text-center">
-          <h2 className="text-xl font-serif mb-4">API Activation Required</h2>
-          <p className="text-sm text-foreground/60 max-w-md mx-auto leading-relaxed">
-            Wix is returning a 403 Forbidden error. This usually means you need
-            to click
-            <strong className="text-accent"> "Publish" </strong>
-            inside the Wix Studio Editor once to activate the Headless API for
-            this project.
-          </p>
-        </div>
-      );
-    }
-    return <div className="pt-40 text-center">Error loading gallery.</div>;
+    return (
+      <div className="pt-40 text-center font-mono text-[10px] uppercase text-red-600 p-20">
+        <h1 className="text-xl mb-4">Wix API Error</h1>
+        <p className="bg-white p-4 inline-block text-black">{error.message}</p>
+        <p className="mt-4 text-gray-400">
+          If it says 'does not exist', ensure 'Import1' is Synced to Live.
+        </p>
+      </div>
+    );
   }
 }
