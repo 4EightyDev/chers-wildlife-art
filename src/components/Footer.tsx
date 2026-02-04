@@ -32,9 +32,9 @@ export default function Footer() {
               <input
                 type="email"
                 placeholder="EMAIL ADDRESS"
-                className="w-full bg-transparent border-b hairline border-foreground/20 py-4 pl-0 pr-12 text-xs tracking-luxury focus:outline-none focus:border-accent transition-colors placeholder:text-foreground/50"
+                className="w-full bg-transparent border-b hairline border-foreground/20 py-4 pl-4 pr-12 text-xs tracking-luxury focus:outline-none focus:border-accent transition-colors placeholder:text-foreground/50"
               />
-              <button className="absolute right-0 top-1/2 -translate-y-1/2 text-foreground hover:text-accent transition-colors">
+              <button className="absolute right-4 top-1/2 -translate-y-1/2 text-foreground hover:text-accent transition-colors">
                 <ArrowRight size={18} strokeWidth={1} />
               </button>
             </form>

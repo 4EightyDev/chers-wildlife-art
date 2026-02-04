@@ -15,11 +15,11 @@ export const ARTWORKS = [
     image: "/images/art/the-hunter.avif",
     inSituImage: "/images/art/in-situ-hunter.avif",
     status: "Available",
-    span: "lg:col-span-2", // Masterpiece span
+    span: "lg:col-span-2",
     original: { dimensions: '14" x 18"', medium: "Acrylic on Board" },
     editions: {
       dimensions: '18" x 24"',
-      medium: "Limited Edition Studio Edition on Canvas",
+      medium: "Limited Edition Giclée on Canvas",
     },
     provenance: [
       "Signature Member, Artists for Conservation (AFC)",
@@ -43,7 +43,7 @@ export const ARTWORKS = [
     original: { dimensions: '48" x 36"', medium: "Acrylic on Canvas" },
     editions: {
       dimensions: '40" x 30"',
-      medium: "Limited Edition Studio Edition on Canvas",
+      medium: "Limited Edition Giclée on Canvas",
     },
   },
   {
@@ -62,7 +62,7 @@ export const ARTWORKS = [
     original: { dimensions: '24" x 36"', medium: "Acrylic on Board" },
     editions: {
       dimensions: '18" x 24"',
-      medium: "Limited Edition Studio Edition on Canvas",
+      medium: "Limited Edition Giclée on Canvas",
     },
   },
 
@@ -78,12 +78,12 @@ export const ARTWORKS = [
       "A dawn encounter in the South Luangwa Valley. These two brothers were observed for hours; the painting represents the split-second of eye contact that changed the energy of the clearing.",
     witnessBadge: "Original Field Reference by Artist",
     image: "/images/art/gladiators.avif",
-    status: "Available",
-    span: "lg:col-span-2", // Masterpiece span
+    status: "Private Collection", // SOLD on original site
+    span: "lg:col-span-2",
     original: { dimensions: '48" x 36"', medium: "Acrylic on Canvas" },
     editions: {
       dimensions: '40" x 30"',
-      medium: "Limited Edition Studio Edition on Canvas",
+      medium: "Limited Edition Giclée on Canvas",
     },
   },
   {
@@ -97,12 +97,12 @@ export const ARTWORKS = [
       "A rare encounter with a juvenile cougar in the high country. The intensity in the gaze was the exact second before the feline vanished back into the brush.",
     witnessBadge: "Original Field Reference by Artist",
     image: "/images/art/pounce.avif",
-    status: "Available",
+    status: "Private Collection", // SOLD on original site
     span: "lg:col-span-1",
     original: { dimensions: '14.6" x 10.5"', medium: "Acrylic on Board" },
     editions: {
       dimensions: '20" x 15"',
-      medium: "Limited Edition Studio Edition on Canvas",
+      medium: "Limited Edition Giclée on Canvas",
     },
   },
   {
@@ -116,12 +116,12 @@ export const ARTWORKS = [
       "Deep winter reference. The Lynx is a phantom of the forest; documenting the subtle greys of the winter coat against the snow required a primary witness's eye for low-light detail.",
     witnessBadge: "Original Field Reference by Artist",
     image: "/images/art/missing-lynx.avif",
-    status: "Available",
+    status: "Private Collection", // SOLD on original site
     span: "lg:col-span-1",
     original: { dimensions: '10" x 8"', medium: "Acrylic on Board" },
     editions: {
       dimensions: '14" x 11"',
-      medium: "Limited Edition Studio Edition on Canvas",
+      medium: "Limited Edition Giclée on Canvas",
     },
   },
   {
@@ -135,12 +135,12 @@ export const ARTWORKS = [
       "Golden hour on the plains. The light was fading fast, hitting the mane with a fiery rim-light that felt as if the lion itself were burning.",
     witnessBadge: "Original Field Reference by Artist",
     image: "/images/art/fire-in-the-sky.avif",
-    status: "Private Collection",
-    span: "lg:col-span-2", // Large scale
+    status: "Private Collection", // SOLD on original site
+    span: "lg:col-span-2",
     original: { dimensions: '36" x 48"', medium: "Acrylic on Canvas" },
     editions: {
       dimensions: '30" x 40"',
-      medium: "Limited Edition Studio Edition on Canvas",
+      medium: "Limited Edition Giclée on Canvas",
     },
   },
 
@@ -161,7 +161,7 @@ export const ARTWORKS = [
     original: { dimensions: '20" x 16"', medium: "Acrylic on Board" },
     editions: {
       dimensions: '24" x 18"',
-      medium: "Limited Edition Studio Edition on Canvas",
+      medium: "Limited Edition Giclée on Canvas",
     },
   },
   {
@@ -180,7 +180,7 @@ export const ARTWORKS = [
     original: { dimensions: '14" x 8.9"', medium: "Acrylic on Board" },
     editions: {
       dimensions: '16" x 12"',
-      medium: "Limited Edition Studio Edition on Canvas",
+      medium: "Limited Edition Giclée on Canvas",
     },
   },
 
@@ -196,7 +196,10 @@ export const ARTWORKS = [
     status: "Available",
     span: "lg:col-span-1",
     original: { dimensions: '11" x 9"', medium: "Colored Pencils" },
-    editions: { dimensions: '11" x 9"', medium: "Fine Art Paper Print" },
+    editions: {
+      dimensions: '11" x 9"',
+      medium: "Limited Edition Giclée on Fine Art Paper",
+    },
   },
   {
     id: "sedona-colors",
@@ -209,7 +212,10 @@ export const ARTWORKS = [
     status: "Available",
     span: "lg:col-span-1",
     original: { dimensions: '5.75" x 10.6"', medium: "Watercolors" },
-    editions: { dimensions: '8" x 12"', medium: "Fine Art Paper Print" },
+    editions: {
+      dimensions: '8" x 12"',
+      medium: "Limited Edition Giclée on Fine Art Paper",
+    },
   },
 ];
 
@@ -264,7 +270,7 @@ export const ARTIST_CONTENT = {
   name: "Cher",
   studioPortrait: "/images/bio/studio-portrait.jpg",
   bioPortrait: "/images/bio/bio-portrait.jpg",
-  eyeDetail: "/images/bio/eye-detail.jpg",
+  eyeDetail: "/images/bio/eye-detail.avif",
   quote: "To capture the eyes is to glimpse the soul of the wild.",
   bio: [
     "From her studio in the Pacific Northwest, Cher translates a lifelong reverence for nature into masterworks of hyper-realism.",
@@ -291,10 +297,10 @@ export const MISSION_CONTENT = {
     "The purpose of my work is to evoke an emotional response to the beauty of the natural world, hoping to inspire a collective desire to protect and preserve our planet's vanishing heritage.",
   primaryWitness: {
     title: "The Primary Witness",
-    image: "/images/primary-witness.jpg",
+    image: "/images/primary-witness-studio.avif",
     subtitle: "From Lens to Brush",
     description:
-      "Unlike many who rely on stock imagery, Cher is the sole author of every reference. She travels into the heart of the wild to photograph her subjects in their native habitats.",
+      "Unlike many who rely on stock imagery, Cher is the sole author of every reference. She travels into the heart of the wild—from the rugged Pacific Northwest to the African savannah—to photograph her subjects in their native habitats.",
     insight:
       "This 'Primary Witness' approach ensures that every stroke is informed by a true encounter with the animal's spirit, light, and environment.",
   },
@@ -316,7 +322,7 @@ export const MISSION_CONTENT = {
   pillars: [
     {
       title: "Visual Advocacy",
-      text: "Creating hyper-realistic portraits that demand attention for endangered species.",
+      text: "Creating hyper-realistic portraits that demand attention for endangered species, moving them from statistics to subjects of beauty.",
     },
     {
       title: "Direct Support",
