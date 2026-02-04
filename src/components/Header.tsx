@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { LogoAnimated } from "@/components/ui/AnimatedLogo";
 
 const navLinks = [
   { name: "Collections", href: "/collections" },
@@ -37,8 +38,14 @@ export default function Header() {
         {/* BRANDING */}
         <Link
           href="/"
-          className="serif-brand text-lg lg:text-xl tracking-widest uppercase text-foreground hover:opacity-70 transition-opacity"
+          className="relative serif-brand text-lg lg:text-xl tracking-widest uppercase text-foreground hover:opacity-70 transition-opacity"
         >
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 -z-10 flex items-center justify-center opacity-10 pointer-events-none">
+            <LogoAnimated
+              noAnimation
+              className="w-full h-full stroke-foreground"
+            />
+          </div>
           Cher&apos;s Wildlife Art
         </Link>
 
