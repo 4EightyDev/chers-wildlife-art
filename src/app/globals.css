@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400&display=swap");
+@import "tailwindcss";
+
+/* 1. DEFINE YOUR TOKENS & SEMANTIC VARIABLES */
+:root {
+  /* Surface Colors */
+  --bg-color: #faf9f6;
+  --fg-color: #1a1a1a;
+
+  /* Brand Accents */
+  --accent-color: #bfa181;
+  --accent-soft: #d4c3b0;
+
+  /* UI Elements */
+  --border-color: #e2e2de;
+  --surface-color: #ffffff;
+
+  /* Typography Scale */
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+/* 2. MAP TO TAILWIND v4 THEME */
+@theme {
+  /* Colors */
+  --color-background: var(--bg-color);
+  --color-foreground: var(--fg-color);
+  --color-accent: var(--accent-color);
+  --color-accent-soft: var(--accent-soft);
+  --color-border: var(--border-color);
+  --color-surface: var(--surface-color);
+
+  /* Fonts */
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Inter", sans-serif;
+
+  /* Custom Spacing / Utilities */
+  --tracking-luxury: 0.15em;
+  --tracking-widest: 0.25em;
+
+  /* Animate durations */
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+}
+
+/* 3. BASE STYLES & OVERRIDES */
+@layer base {
+  *,
+  ::after,
+  ::before {
+    /* Set all borders to use our variable by default */
+    border-color: var(--border-color);
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  .serif-brand {
+    font-family: var(--font-serif);
+    font-weight: 300; /* Luxury brands rarely use bold headers */
+  }
+
+  /* Custom Selection Color */
+  ::selection {
+    background-color: rgba(191, 161, 129, 0.2);
+    color: var(--fg-color);
+  }
+}
+
+/* 4. UTILITY CLASSES (The Luxury "Polish") */
+@layer utilities {
+  .hairline {
+    border-width: 0.5px;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
