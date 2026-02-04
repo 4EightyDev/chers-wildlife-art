@@ -270,10 +270,11 @@ export const ARTIST_CONTENT = {
   name: "Cher",
   studioPortrait: "/images/bio/studio-portrait.jpg",
   bioPortrait: "/images/bio/bio-portrait.jpg",
-  eyeDetail: "/images/bio/eye-detail.avif",
+  eyeDetail: "/images/bio/eye-detail.jpg",
   quote: "To capture the eyes is to glimpse the soul of the wild.",
   bio: [
-    "From her studio in the Pacific Northwest, Cher translates a lifelong reverence for nature into masterworks of hyper-realism.",
+    "Residing in the vibrant landscape of Chandler, Arizona, Cher translates a lifelong reverence for nature into masterworks of hyper-realism.",
+    "Working from her private studio in the Sonoran Desert, her current work is deeply influenced by the intense light and resilient life found in the high desert of the American Southwest.",
     "As a Signature Member of Artists for Conservation, her work serves a dual purpose: to honor the raw beauty of the animal kingdom and to ensure its survival.",
   ],
 };
@@ -286,7 +287,7 @@ export const HOME_CONTENT = {
     titleLastPart: "Wild",
     featuredArtworkId: "the-hunter",
     description:
-      "Cher’s Wildlife Art explores the profound connection between the observer and the observed. Each stroke is an act of conservation, capturing the raw dignity of Earth’s most majestic inhabitants.",
+      "Now based in Chandler, Arizona, Cher’s Wildlife Art explores the profound connection between the observer and the observed. Each stroke is an act of conservation, capturing the raw dignity of Earth’s most majestic inhabitants.",
   },
 };
 
@@ -297,10 +298,10 @@ export const MISSION_CONTENT = {
     "The purpose of my work is to evoke an emotional response to the beauty of the natural world, hoping to inspire a collective desire to protect and preserve our planet's vanishing heritage.",
   primaryWitness: {
     title: "The Primary Witness",
-    image: "/images/primary-witness-studio.avif",
+    image: "/images/primary-witness.jpg",
     subtitle: "From Lens to Brush",
     description:
-      "Unlike many who rely on stock imagery, Cher is the sole author of every reference. She travels into the heart of the wild—from the rugged Pacific Northwest to the African savannah—to photograph her subjects in their native habitats.",
+      "Unlike many who rely on stock imagery, Cher is the sole author of every reference. From her studio in Chandler, she travels into the heart of the wild—from the Sonoran Desert to the African savannah—to photograph her subjects in their native habitats.",
     insight:
       "This 'Primary Witness' approach ensures that every stroke is informed by a true encounter with the animal's spirit, light, and environment.",
   },

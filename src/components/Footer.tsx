@@ -56,6 +56,12 @@ export default function Footer() {
             The Catalog
           </Link>
           <Link
+            href="/exhibitions"
+            className="text-[11px] uppercase tracking-luxury hover:text-accent transition-colors"
+          >
+            Exhibitions
+          </Link>
+          <Link
             href="/mission"
             className="text-[11px] uppercase tracking-luxury hover:text-accent transition-colors"
           >
@@ -94,7 +100,7 @@ export default function Footer() {
 
           <div className="flex gap-6 text-[10px] uppercase tracking-widest text-foreground/40">
             <span>© 2025 Cher&apos;s Wildlife Art</span>
-            <Link
+            {/* <Link
               href="/privacy"
               className="hover:text-foreground transition-colors"
             >
@@ -105,7 +111,7 @@ export default function Footer() {
               className="hover:text-foreground transition-colors"
             >
               Terms
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>

@@ -57,7 +57,7 @@ export default function ConciergePage() {
                   <p className="text-[10px] uppercase tracking-widest text-foreground/40 mb-1">
                     Studio Location
                   </p>
-                  <p className="text-sm font-sans">Pacific Northwest, USA</p>
+                  <p className="text-sm font-sans">Chandler, Arizona</p>
                 </div>
               </div>
 
