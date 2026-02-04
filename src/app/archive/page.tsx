@@ -1,122 +1,59 @@
-"use client";
+import { wixClient } from "@/lib/wixClient";
+import ArchiveClient from "@/app/archive/ArchiveClient";
 
-import React, { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import Section from "@/components/ui/Section";
-import SectionHeading from "@/components/ui/SectionHeading";
-import { ARTWORKS } from "@/data/site-data";
+export default async function ArchivePage() {
+  try {
+    // 1. Fetch from 'Artworks' collection
+    const response = await wixClient.items.query("Artworks").limit(100).find();
 
-const categories = ["All", "Avian", "Apex", "Coastal", "Legacy"];
+    // 2. Map Wix's auto-generated field keys to your clean UI
+    const artworks = response.items
+      .filter((item) => item && item.data)
+      .map((item) => {
+        const d = item.data;
 
-export default function ArchivePage() {
-  const [filter, setFilter] = useState("All");
+        // Wix Image Helper
+        const rawImage = typeof d.image === "string" ? d.image : d.image?.src;
+        const imageUrl = rawImage
+          ? `https://static.wixstatic.com/media/${rawImage.replace("wix:image://v1/", "").split("/")[0]}`
+          : null;
 
-  const filteredArt =
-    filter === "All"
-      ? ARTWORKS
-      : ARTWORKS.filter(
-          (art) => art.collectionId.toLowerCase() === filter.toLowerCase(),
-        );
+        return {
+          _id: item._id,
+          title: d.title || "Untitled",
+          subject: d.subject || d.Subject || "Wildlife Study",
+          collectionId: d.CollectionID || "legacy",
+          // These match the keys (d., F., W) from your CMS screenshot
+          description: d["d."] || d.description || "",
+          fieldNotes: d["F."] || d.fieldNotes || "",
+          witnessBadge: d["W"] || d.witnessBadge || "Original Reference",
+          status: d.status || d.Status || "Available",
+          image: imageUrl,
+        };
+      });
 
-  return (
-    <main className="pt-20">
-      <Section>
-        {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-20">
-          <SectionHeading
-            eyebrow="The Complete Archive"
-            title={
-              <>
-                Catalog <span className="italic">Raisonné</span>
-              </>
-            }
-            description="A comprehensive and systematic record of Cher’s studio works, providing a definitive history of her artistic evolution and conservation narrative."
-            className="mb-0"
-          />
+    return <ArchiveClient initialArtworks={artworks} />;
+  } catch (error: any) {
+    console.error("Wix Fetch Error:", error);
 
-          {/* Luxury Filter Bar */}
-          <div className="flex flex-wrap gap-x-8 gap-y-4 border-b hairline border-border/40 pb-4">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setFilter(cat)}
-                className={`text-[10px] uppercase tracking-widest transition-all duration-500 ${
-                  filter === cat
-                    ? "text-accent"
-                    : "text-foreground/30 hover:text-foreground"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* The Disciplined Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-12">
-          <AnimatePresence mode="popLayout">
-            {filteredArt.map((art) => (
-              <motion.div
-                key={art.id}
-                layout
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                className="group flex flex-col"
-              >
-                <Link
-                  href={`/artwork/${art.id}`}
-                  className="relative aspect-[4/5] overflow-hidden bg-surface-muted hairline mb-6"
-                >
-                  <Image
-                    src={art.image}
-                    alt={art.title}
-                    fill
-                    className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                  />
-                  {/* Subtle Status Tag */}
-                  <div className="absolute top-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span className="text-[8px] uppercase tracking-[0.2em] bg-background/90 px-3 py-1 hairline">
-                      {art.status}
-                    </span>
-                  </div>
-                </Link>
-
-                <div className="px-1">
-                  <h3 className="font-serif text-lg mb-1">{art.title}</h3>
-                  <div className="flex justify-between items-center">
-                    <p className="text-[9px] uppercase tracking-widest text-foreground/40">
-                      {art.subject}
-                    </p>
-                    <span className="text-[9px] text-accent tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity">
-                      View →
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </div>
-        {/* Raisonné Note */}
-        <div className="mt-32 pt-12 border-t hairline border-border/30 max-w-xl">
-          <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-foreground/40 leading-relaxed">
-            Note: The Catalog Raisonné is a living record of Cher&apos;s primary
-            works. Each entry includes provenance, exhibition history, and
-            technical specifications. For private registry inquiries or to
-            verify a previous acquisition, please contact the studio concierge.
+    // If it's still a 403, we show a helpful instruction
+    if (
+      error.message?.includes("403") ||
+      error.details?.applicationError?.code === 403
+    ) {
+      return (
+        <div className="pt-40 px-10 text-center">
+          <h2 className="text-xl font-serif mb-4">API Activation Required</h2>
+          <p className="text-sm text-foreground/60 max-w-md mx-auto leading-relaxed">
+            Wix is returning a 403 Forbidden error. This usually means you need
+            to click
+            <strong className="text-accent"> "Publish" </strong>
+            inside the Wix Studio Editor once to activate the Headless API for
+            this project.
           </p>
         </div>
-      </Section>
-
-      {/* Counter Utility */}
-      <div className="pb-24 text-center">
-        <p className="text-[10px] uppercase tracking-[0.4em] text-foreground/20">
-          Showing {filteredArt.length} Masterworks
-        </p>
-      </div>
-    </main>
-  );
+      );
+    }
+    return <div className="pt-40 text-center">Error loading gallery.</div>;
+  }
 }
