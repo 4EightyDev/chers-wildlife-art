@@ -87,15 +87,19 @@ export default function ArtworkDetailPage({
               </span>
               <span>
                 {selectedFormat === "original"
-                  ? artwork.medium
-                  : "Archival Pigment Print"}
+                  ? artwork.original.medium
+                  : artwork.editions.medium}
               </span>
             </div>
             <div className="flex justify-between border-b hairline border-border/20 py-3 font-sans text-sm">
               <span className="text-[11px] uppercase text-foreground/40 tracking-widest">
                 Dimensions
               </span>
-              <span>{artwork.size}</span>
+              <span>
+                {selectedFormat === "original"
+                  ? artwork.original.dimensions
+                  : artwork.editions.dimensions}
+              </span>
             </div>
           </div>
 

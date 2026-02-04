@@ -92,7 +92,7 @@ export default function CollectionDetailPage({
                     {art.title}
                   </h3>
                   <p className="text-[10px] uppercase tracking-widest text-foreground/40">
-                    {art.size} • Original & Editions
+                    {art.original.dimensions} • Original & Editions
                   </p>
                 </div>
               </div>

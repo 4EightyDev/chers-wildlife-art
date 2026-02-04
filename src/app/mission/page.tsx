@@ -122,7 +122,7 @@ export default function MissionPage() {
             className="relative aspect-[4/3] w-full hairline overflow-hidden shadow-sm bg-background order-1 lg:order-2"
           >
             <Image
-              src={partnerships[0].image}
+              src={partnerships[0].image!}
               alt="International Exhibition and Recognition"
               fill
               className="object-contain lg:object-cover" // Contain for safety, cover if you want edge-to-edge
